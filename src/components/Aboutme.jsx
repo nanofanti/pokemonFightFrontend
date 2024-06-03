@@ -1,7 +1,7 @@
 function Aboutme() {
   return (
-    <div>
-      <h1>About me page</h1>
+    <div className="flex justify-center">
+      <h1>Link to my Portfolio</h1>
     </div>
   );
 }

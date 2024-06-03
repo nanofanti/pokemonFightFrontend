@@ -5,6 +5,7 @@ export const PokemonAPIContext = createContext();
 export default function PokemonAPIContextProvider(props) {
   const [loading, setLoading] = useState(false);
   const [pokemon, setPokemon] = useState([]);
+  const [chosenPokemon, setChosenPokemon] = useState([]);
   const api = "http://localhost:8080/pokemon";
 
   useEffect(() => {
@@ -24,7 +25,9 @@ export default function PokemonAPIContextProvider(props) {
   }, []);
 
   return (
-    <PokemonAPIContext.Provider value={{ pokemon, loading }}>
+    <PokemonAPIContext.Provider
+      value={{ pokemon, loading, chosenPokemon, setChosenPokemon }}
+    >
       {props.children}
     </PokemonAPIContext.Provider>
   );

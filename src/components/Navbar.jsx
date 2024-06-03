@@ -9,16 +9,15 @@ function Navbar() {
     localStorage.removeItem("user");
     setUser(null);
   };
-
+  console.log(user);
   return (
     <div className="flex justify-evenly">
       <NavLink to="/">Homepage</NavLink>
       <NavLink to="/pokedex">Pokedex</NavLink>
-      <NavLink to="/aboutme">About me</NavLink>
-      <NavLink to="/pokefight">Pokefight</NavLink>
       <NavLink to="/leaderboard">Leaderboard</NavLink>
       {user !== null && (
         <div>
+          <h2>{user.nickName}</h2>
           <button onClick={handleLogOut}>Log Out</button>
         </div>
       )}

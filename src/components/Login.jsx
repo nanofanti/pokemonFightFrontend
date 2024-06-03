@@ -1,6 +1,5 @@
 import { useState, useContext } from "react";
 import { UserContext } from "../context/UserContext";
-import { Link } from "react-router-dom";
 import { ToastContainer, toast, Bounce } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -50,6 +49,7 @@ function Login() {
       setLoading(false);
       setEmail("");
       setPassword("");
+      notify();
     }
   };
 
@@ -74,7 +74,8 @@ function Login() {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <button onClick={notify}>Log in!</button>
+        <button>Log in!</button>
+
         <ToastContainer
           position="top-right"
           autoClose={5000}
@@ -88,8 +89,8 @@ function Login() {
           theme="light"
           transition:Bounce
         />
+
         {error && <div>{error}</div>}
-        {user ? <Link to="/userprofile">Your Profile</Link> : null}
       </form>
     </div>
   );

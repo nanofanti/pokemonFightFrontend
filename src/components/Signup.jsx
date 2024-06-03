@@ -7,6 +7,7 @@ import "react-toastify/dist/ReactToastify.css";
 function Signup() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [nickName, setNickName] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
@@ -33,7 +34,7 @@ function Signup() {
     const response = await fetch("http://localhost:8080/user/signup", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, password }),
+      body: JSON.stringify({ email, password, nickName }),
     });
 
     const data = await response.json();
@@ -50,6 +51,8 @@ function Signup() {
       setLoading(false);
       setEmail("");
       setPassword("");
+      setNickName("");
+      notify();
     }
   };
 
@@ -74,7 +77,16 @@ function Signup() {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <button onClick={notify}>Sign up here!</button>
+        <label htmlFor="nickname">Nickname</label>
+        <input
+          type="text"
+          id="nickname"
+          name="nickname"
+          placeholder="Nickname"
+          value={nickName}
+          onChange={(e) => setNickName(e.target.value)}
+        />
+        <button>Sign up here!</button>
         <ToastContainer
           position="top-right"
           autoClose={5000}

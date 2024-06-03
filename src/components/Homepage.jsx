@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { UserContext } from "../context/UserContext";
-import Login from "./Login";
 
 function Homepage() {
   const { user } = useContext(UserContext);
@@ -10,8 +9,16 @@ function Homepage() {
       <Link to="/pokedex">
         <img src="/home_banner.png" alt="" />
       </Link>
-      <Link to="/login">Log in</Link>
-      <Link to="/signup">Sign up</Link>
+      {!user ? (
+        <div>
+          <Link to="/login">Log in</Link>
+          <Link to="/signup">Sign up</Link>
+        </div>
+      ) : (
+        <Link to="/pokedex">
+          <h2>Choose your Pokemon!</h2>
+        </Link>
+      )}
     </div>
   );
 }
