@@ -1,7 +1,11 @@
+import { Link } from "react-router-dom";
+
 function Homepage() {
   return (
-    <div>
-      <h1>Homapage</h1>
+    <div className="flex flex-col items-center">
+      <Link to="/pokedex">
+        <img src="/home_banner.png" alt="" />
+      </Link>
     </div>
   );
 }

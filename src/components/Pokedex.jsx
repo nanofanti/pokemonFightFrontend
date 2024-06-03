@@ -1,9 +1,10 @@
 import { useContext } from "react";
 import { PokemonAPIContext } from "../context/PokemonAPIContext";
+import { Link } from "react-router-dom";
 
 function Pokedex() {
   const { pokemon, loading } = useContext(PokemonAPIContext);
-  console.log(pokemon);
+
   return (
     <>
       <h1>Pokedex Page</h1>
@@ -14,7 +15,9 @@ function Pokedex() {
           {pokemon.map((item) => (
             <div key={item._id}>
               <h2>{item.pokemonName}</h2>
-              <img src={item.pokemonMainPic} alt={item.pokemonName} />
+              <Link to={`/pokedex/${item.id}`}>
+                <img src={item.pokemonMainPic} alt={item.pokemonName} />
+              </Link>
             </div>
           ))}
         </div>
