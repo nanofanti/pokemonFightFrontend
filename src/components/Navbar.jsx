@@ -11,20 +11,15 @@ function Navbar() {
   };
 
   return (
-    <div>
+    <div className="flex justify-evenly">
+      <NavLink to="/">Homepage</NavLink>
+      <NavLink to="/pokedex">Pokedex</NavLink>
+      <NavLink to="/aboutme">About me</NavLink>
+      <NavLink to="/pokefight">Pokefight</NavLink>
+      <NavLink to="/leaderboard">Leaderboard</NavLink>
       {user !== null && (
         <div>
           <button onClick={handleLogOut}>Log Out</button>
-        </div>
-      )}
-
-      {user === null && (
-        <div className="flex justify-evenly">
-          <NavLink to="/">Homepage</NavLink>
-          <NavLink to="/pokedex">Pokedex</NavLink>
-          <NavLink to="/pokefight">Pokefight</NavLink>
-          <NavLink to="/leaderboard">Leaderboard</NavLink>
-          <NavLink to="/aboutme">About me</NavLink>
         </div>
       )}
     </div>

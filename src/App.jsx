@@ -12,6 +12,7 @@ import Aboutme from "./components/Aboutme";
 import PokemonIdPage from "./components/PokemonIdPage";
 import Signup from "./components/Signup";
 import Login from "./components/Login";
+import UserProfile from "./components/UserProfile";
 
 function App() {
   const { user } = useContext(UserContext);
@@ -20,15 +21,13 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<Homepage />} />
-        <Route path="/signup" element={!user ? <Signup /> : <Homepage />} />
-        <Route path="/login" element={!user ? <Login /> : <Homepage />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/userprofile" element={<UserProfile />} />
         <Route path="/pokedex" element={<Pokedex />} />
         <Route path="/pokedex/:pokemonid" element={<PokemonIdPage />} />
-        <Route path="/pokefight" element={!user ? <Signup /> : <Pokefight />} />
-        <Route
-          path="/leaderboard"
-          element={!user ? <Signup /> : <Leaderboard />}
-        />
+        <Route path="/pokefight" element={<Pokefight />} />
+        <Route path="/leaderboard" element={<Leaderboard />} />
         <Route path="/aboutme" element={<Aboutme />} />
       </Routes>
     </>

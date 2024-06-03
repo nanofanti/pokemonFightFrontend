@@ -1,5 +1,8 @@
 import { useState, useContext } from "react";
 import { UserContext } from "../context/UserContext";
+import { Link } from "react-router-dom";
+import { ToastContainer, toast, Bounce } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -7,7 +10,20 @@ function Login() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const { setUser } = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
+
+  const notify = () =>
+    toast.success("Log in successful ✌️", {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+      transition: Bounce,
+    });
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -58,7 +74,22 @@ function Login() {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <button>Log in</button>
+        <button onClick={notify}>Log in!</button>
+        <ToastContainer
+          position="top-right"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="light"
+          transition:Bounce
+        />
+        {error && <div>{error}</div>}
+        {user ? <Link to="/userprofile">Your Profile</Link> : null}
       </form>
     </div>
   );

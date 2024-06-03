@@ -1,5 +1,8 @@
 import { useState, useContext } from "react";
 import { UserContext } from "../context/UserContext";
+import { Link } from "react-router-dom";
+import { ToastContainer, toast, Bounce } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function Signup() {
   const [email, setEmail] = useState("");
@@ -7,7 +10,20 @@ function Signup() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const { setUser } = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
+
+  const notify = () =>
+    toast.success("You have successfully signed up ✌️", {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+      transition: Bounce,
+    });
 
   const handleSignUp = async (e) => {
     e.preventDefault();
@@ -58,9 +74,23 @@ function Signup() {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <button>Sign up here!</button>
+        <button onClick={notify}>Sign up here!</button>
+        <ToastContainer
+          position="top-right"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="light"
+          transition:Bounce
+        />
         {error && <h2>{error}</h2>}
       </form>
+      {!user ? null : <Link to="/pokedex">Choose your pokemon</Link>}
     </div>
   );
 }
