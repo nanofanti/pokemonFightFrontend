@@ -1,5 +1,6 @@
 import { useContext, useState, useEffect } from "react";
 import { PokemonAPIContext } from "../context/PokemonAPIContext";
+import { useNavigate } from "react-router-dom"; // Use useNavigate instead of Link
 
 function Pokefight() {
   const { pokemon, loading, chosenPokemon, setChosenPokemon } =
@@ -40,6 +41,9 @@ function Pokefight() {
   const [messageYouWon, setMessageYouWon] = useState(false);
   const [messageYouLost, setMessageYouLost] = useState(false);
 
+  const [caughtPokemon, setCaughtPokemon] = useState([]);
+
+  const navigate = useNavigate(); // Navigation hook
   const handleMyPoints = () => {
     setMyCounter((prevCounter) => prevCounter + 1);
   };
@@ -47,10 +51,6 @@ function Pokefight() {
   const handleOpponentCounter = () => {
     setOpponentCounter((prevCounter) => prevCounter + 1);
   };
-
-  console.log("MYCOUNTER", myCounter);
-  console.log("MYOPPONENTCOUNTER", opponentCounter);
-  console.log(pokemon);
 
   useEffect(() => {
     if (!loading && chosenPokemon && pokemon.length > 0) {
@@ -166,6 +166,21 @@ function Pokefight() {
 
   const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
+  useEffect(() => {
+    // Check for a winner after all stats are shown
+    if (showSPDefense) {
+      if (myCounter > opponentCounter) {
+        setMessageYouWon(true);
+        setCaughtPokemon((prevCaught) => [...prevCaught, opponent]);
+      } else if (myCounter < opponentCounter) {
+        setMessageYouLost(true);
+      } // No message for a tie
+    }
+  }, [myCounter, opponentCounter, showSPDefense, opponent]);
+
+  const handleCatch = () => {
+    navigate("/mypokemons", { state: { caughtPokemon } }); // Pass caught data
+  };
   return (
     <>
       <div className="flex justify-evenly">
@@ -313,6 +328,15 @@ function Pokefight() {
           )}
           <button onClick={handleFight}>FIGHT</button>
         </div>
+        {messageYouWon && (
+          <div>
+            <div className="text-green-500 text-2xl">You Won!</div>
+            <button onClick={handleCatch}>CATCH IT!</button>
+          </div>
+        )}
+        {messageYouLost && (
+          <div className="text-red-500 text-2xl">You Lost!</div>
+        )}
       </div>
     </>
   );

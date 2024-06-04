@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { PokemonAPIContext } from "../context/PokemonAPIContext";
 import { UserContext } from "../context/UserContext";
 import { Link } from "react-router-dom";
