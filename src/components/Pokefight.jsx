@@ -36,6 +36,10 @@ function Pokefight() {
   //Opponent counter
   const [opponentCounter, setOpponentCounter] = useState(0);
 
+  //Show end messages
+  const [messageYouWon, setMessageYouWon] = useState(false);
+  const [messageYouLost, setMessageYouLost] = useState(false);
+
   const handleMyPoints = () => {
     setMyCounter((prevCounter) => prevCounter + 1);
   };
@@ -44,8 +48,8 @@ function Pokefight() {
     setOpponentCounter((prevCounter) => prevCounter + 1);
   };
 
-  console.log(myCounter);
-  console.log(opponentCounter);
+  console.log("MYCOUNTER", myCounter);
+  console.log("MYOPPONENTCOUNTER", opponentCounter);
   console.log(pokemon);
 
   useEffect(() => {
