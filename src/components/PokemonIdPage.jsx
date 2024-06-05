@@ -7,13 +7,14 @@ import { Link } from "react-router-dom";
 function PokemonIdPage() {
   const { pokemon, loading, chosenPokemon, setChosenPokemon } =
     useContext(PokemonAPIContext);
-  const { user } = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
 
   const { pokemonid } = useParams();
   const findThatPokemon = pokemon.find(
     (item) => item.id === parseInt(pokemonid, 10)
   );
 
+  console.log(user);
   console.log(findThatPokemon);
   const chosePokemonToFight = () => {
     setChosenPokemon(findThatPokemon);

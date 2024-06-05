@@ -1,13 +1,15 @@
 import { useContext, useState, useEffect } from "react";
 import { PokemonAPIContext } from "../context/PokemonAPIContext";
-import { useNavigate } from "react-router-dom"; // Use useNavigate instead of Link
+import { useNavigate } from "react-router-dom";
+import { UserContext } from "../context/UserContext";
 
 function Pokefight() {
   const { pokemon, loading, chosenPokemon, setChosenPokemon } =
     useContext(PokemonAPIContext);
+  const { user, setUser } = useContext(UserContext);
   const [opponent, setOpponent] = useState(null);
   const [isLoadingOpponent, setIsLoadingOpponent] = useState(null);
-
+  console.log(user);
   //Battle Logic
   //HP
   const [youHPWin, setYouHPWin] = useState(false);
@@ -335,7 +337,7 @@ function Pokefight() {
           </div>
         )}
         {messageYouLost && (
-          <div className="text-red-500 text-2xl">You Lost!</div>
+          <div className="text-red-500 text-2xl">You Lost! Try again!</div>
         )}
       </div>
     </>
